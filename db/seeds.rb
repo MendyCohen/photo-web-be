@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Photographer.destroy_all
-# Category.destroy_all
-# Picture.destroy_all
+ Photographer.destroy_all
+ Category.destroy_all
+Picture.destroy_all
 
 
 20.times {
@@ -20,5 +20,5 @@
 }
 
 30.times {
-  Picture.create(category: Category.all.sample, photographer: Photographer.all.sample)
+  Picture.create(category: Category.all.sample, photographer: Photographer.all.sample, image: Faker::Avatar.image, title: Faker::GameOfThrones.character)
 }

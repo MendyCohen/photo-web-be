@@ -4,7 +4,7 @@
   # before_action :find_photographer, only: [:update]
 
   def index
-    @photographers = Photogrpher.all
+    @photographers = Photographer.all
     render json: @photographers
   end
 

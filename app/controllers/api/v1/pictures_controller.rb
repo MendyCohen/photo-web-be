@@ -1,29 +1,39 @@
  class Api::V1::PicturesController < ApplicationController
 # class PicturesController < ApplicationController
 
-  before_action :find_pictures, only: [:update]
+  before_action :find_pictures, only: [:update, :destroy]
 
   def index
-    @pictures = Pictures.all
+    @pictures = Picture.all
     render json: @pictures
   end
 
+  def create
+    @picture = Picture.create(pictures_params)
+    render json: @picture
+  end
+
   def update
-    @pictures.update(pictures_params)
-      if @pictures.save
-        render json: @pictures, status: :accepted
+    @picture.update(pictures_params)
+      if @picture.save
+        render json: @picture, status: :accepted
       else
-        render json: {errors: @pictures.errors.full_messages}, status: :unprocessible_entity
+        render json: {errors: @picture.errors.full_messages}, status: :unprocessible_entity
       end
+  end
+
+  def destroy
+    # byebug
+    @picture.destroy
   end
 
   private
   def pictures_params
-    params.permit(:name, :camera)
+    params.permit(:photographer_id, :category_id, :title, :image)
   end
 
-  def find_note
-    @pictures = Pictures.find(params[:id])
+  def find_pictures
+    @picture = Picture.find(params[:id])
   end
 
 end
